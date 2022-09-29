@@ -28,7 +28,6 @@ SECRET_KEY = env('SECRET_KEY', default='SECRET_KEY')  # noqa
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env('DEBUG', default=True)
-
 ALLOWED_HOSTS = env('ALLOWED_HOSTS', default='').split(',')
 
 
