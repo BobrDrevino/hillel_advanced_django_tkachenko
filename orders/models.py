@@ -35,9 +35,18 @@ class Order(PKMixin):
         blank=True
     )
     products = models.ManyToManyField("items.Product")
-    discount = models.ForeignKey(
-        Discount,
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True
-    )
+    discount = models.ForeignKey(Discount,
+                                 on_delete=models.SET_NULL,
+                                 null=True,
+                                 blank=True
+                                 )
+
+    def amount_with_discount(self):
+        if self.discount is True:
+            if self.discount.discount_type == DiscountTypes.VALUE:
+                return self.total_amount - self.discount.amount
+            elif self.discount.discount_type == DiscountTypes.PERCENT:
+                return self.total_amount - (
+                            self.total_amount * (self.discount.amount / 100))
+        else:
+            return self.total_amount
