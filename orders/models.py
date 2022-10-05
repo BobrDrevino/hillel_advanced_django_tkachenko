@@ -1,3 +1,4 @@
+from decimal import Decimal
 from django.contrib.auth import get_user_model
 from django.db import models
 
@@ -7,7 +8,9 @@ from shop.model_choices import DiscountTypes
 
 
 class Discount(PKMixin):
-    amount = models.PositiveSmallIntegerField(
+    amount = models.DecimalField(
+        max_digits=MAX_DIGITS,
+        decimal_places=DECIMAL_PLACES,
         default=0
     )
     code = models.CharField(
@@ -44,9 +47,13 @@ class Order(PKMixin):
     def amount_with_discount(self):
         if self.discount is True:
             if self.discount.discount_type == DiscountTypes.VALUE:
-                return self.total_amount - self.discount.amount
+                return (self.total_amount - self.discount.amount).quantize(
+                    Decimal('.00'))
             elif self.discount.discount_type == DiscountTypes.PERCENT:
-                return self.total_amount - (
-                            self.total_amount * (self.discount.amount / 100))
-        else:
-            return self.total_amount
+                return self.total_amount - (self.total_amount * (
+                            self.discount.amount / 100)).quantize(
+                    Decimal('.00'))
+        return self.total_amount
+
+    def __str__(self):
+        return f'{self.amount_with_discount()}'
