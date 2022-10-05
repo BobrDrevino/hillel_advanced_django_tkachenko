@@ -31,5 +31,5 @@ class CategoryAdmin(admin.ModelAdmin):
     def category_image(self, obj):
         if obj.image:
             return mark_safe((
-                '<img src="{}" width="64" height="64" />'.format(obj.image.url)))
+                '<img src="{}" width="64" height="64" />'.format(obj.image.url))) # noqa
         return ''
