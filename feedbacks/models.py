@@ -13,9 +13,9 @@ class Feedback(PKMixin):
 
     def reformat_text(self):
         delete = set("""@/*#$%^\[]-_)+=;`~<>\|""")    # noqa
-        start_text = self.text
+        user_text = self.text
         new_text = ''
-        for i in start_text:
+        for i in user_text:
             if i not in delete:
                 new_text += i
         self.text = new_text
