@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 
 class SignupForm(forms.ModelForm):
     error_messages = {'password_error': "The two password fields didn't match"}
+
     email = forms.EmailField(
         label='Email',
         widget=forms.EmailInput(),
@@ -36,7 +37,7 @@ class SignupForm(forms.ModelForm):
 
     def save(self, commit=True):
         user = super().save(commit=False)
-        user.username = self.cleaned_data['email']
+        user.username = self.cleaned_data['email'].split('@')[0]
         user.set_password(self.cleaned_data["new_password"])
         if commit:
             user.save()
