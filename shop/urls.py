@@ -17,15 +17,19 @@ from django.contrib import admin
 from django.urls import path, include
 from django.conf import settings
 
-from items.urls import urlpatterns as items_urlpatterns
+# from items.urls import urlpatterns as items_urlpatterns
 from feedbacks.urls import urlpatterns as feedbacks_urlpatterns
 from users.urls import urlpatterns as users_urlpatterns
+from main.urls import urlpatterns as main_urlpatterns
+from products.urls import urlpatterns as products_urlpatterns
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include(items_urlpatterns)),
+    path('', include(main_urlpatterns)),
+    # path('', include(items_urlpatterns)),
     path('', include(feedbacks_urlpatterns)),
-    path('', include(users_urlpatterns))
+    path('', include(users_urlpatterns)),
+    path('', include(products_urlpatterns)),
 ]
 
 if settings.DEBUG:
@@ -33,3 +37,5 @@ if settings.DEBUG:
 
     urlpatterns += static(settings.MEDIA_URL,
                           document_root=settings.MEDIA_ROOT)
+    urlpatterns += static(settings.STATIC_URL,
+                          document_root=settings.STATIC_ROOT)
