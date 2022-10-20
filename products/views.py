@@ -27,14 +27,14 @@ def export_csv(request, *args, **kwargs):
     writer.writeheader()
 
     for product in Product.objects.iterator():
-         writer.writerow(
-             {'name': product.name,
-              'description': product.description,
-              'price': product.price,
-              'sku': product.sku,
-              'category': product.category,
-              'image': settings.DOMAIN + product.image.url
-              }
-         )
+        writer.writerow(
+            {'name': product.name,
+             'description': product.description,
+             'price': product.price,
+             'sku': product.sku,
+             'category': product.category,
+             'image': settings.DOMAIN + product.image.url
+             }
+        )
 
     return response
