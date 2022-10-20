@@ -10,7 +10,7 @@
                     <div class="card mb-3">
                     {% if product.image %}
                         <figure class="text-center">
-                            <img class="product-image"
+                            <img class="product-image p-3"
                                  src="{{ product.image.url }}"
                                  alt="{{ product.name }}">
                         </figure>
@@ -30,7 +30,7 @@
                                     <div class="d-inline-flex flex-column rounded border p-2">
                                         <p>{{ sub.name }}</p>
                                         <figure class="text-center d-inline">
-                                            <img class="product-image"
+                                            <img class="product-image-include p-3"
                                                  src="{{ sub.image.url }}"
                                                  alt="{{ product.name }}">
                                         </figure>
@@ -39,7 +39,7 @@
                             {% endif %}
                             <div class="text-center">
                                 <div class="h3">
-                                    {{ product.price }} UAH
+                                    {{ product.price }} USD
                                 </div>
                                 <p>
                                     <a href="#" class="btn btn-primary">
