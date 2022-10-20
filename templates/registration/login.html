@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<h1>Login</h1>
+{%  extends 'base.html' %}
+{% load static %}
+{% block content %}
+<h1>Login page</h1>
 {{ request.user.is_authenticated }}
 <div>
     <form method="post">
@@ -20,5 +16,4 @@
     {{ form.errors }}
 </p>
 </div>
-</body>
-</html>
+{% endblock content %}

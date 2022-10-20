@@ -143,5 +143,5 @@ STATICFILES_DIRS = ['static_dev']
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGOUT_REDIRECT_URL = reverse_lazy('login')
-LOGIN_REDIRECT_URL = 'items'
+LOGIN_REDIRECT_URL = 'main'
 LOGIN_URL = 'login'
