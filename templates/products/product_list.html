@@ -1,5 +1,5 @@
 {%  extends 'base.html' %}
-
+{% load static %}
 {% block content %}
 <section>
   <h1>All products:</h1>
@@ -10,8 +10,8 @@
                     <div class="card mb-3">
                     {% if product.image %}
                         <figure class="text-center">
-                            <img src="{{ product.image.url }}"
-                                 class="product-image p-3"
+                            <img class="product-image"
+                                 src="{{ product.image.url }}"
                                  alt="{{ product.name }}">
                         </figure>
                     {% endif %}
@@ -30,8 +30,8 @@
                                     <div class="d-inline-flex flex-column rounded border p-2">
                                         <p>{{ sub.name }}</p>
                                         <figure class="text-center d-inline">
-                                            <img src="{{ sub.image.url }}"
-                                                 class="product-image p-3"
+                                            <img class="product-image"
+                                                 src="{{ sub.image.url }}"
                                                  alt="{{ product.name }}">
                                         </figure>
                                     </div>

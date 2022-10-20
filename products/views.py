@@ -1,5 +1,11 @@
-from django.views.generic import TemplateView
+from django.views.generic import ListView, DetailView
+
+from products.models import Product
 
 
-class ProductsView(TemplateView):
-    template_name = 'products/index.html'
+class ProductsView(ListView):
+    model = Product
+
+
+class ProductDetail(DetailView):
+    model = Product
