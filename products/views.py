@@ -1,9 +1,13 @@
 import csv
 
 from django.conf import settings
+from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import HttpResponse
-from django.views.generic import ListView, DetailView
+from django.urls import reverse_lazy
+from django.utils.decorators import method_decorator
+from django.views.generic import ListView, DetailView, FormView
 
+from products.forms import ImportCSVForm
 from products.models import Product
 
 
@@ -38,3 +42,18 @@ def export_csv(request, *args, **kwargs):
         )
 
     return response
+
+
+class ImportCSV(FormView):
+    form_class = ImportCSVForm
+    template_name = 'products/import_csv.html'
+    success_url = reverse_lazy('products')
+
+    @method_decorator(login_required)
+    @method_decorator(user_passes_test(lambda u: u.is_staff))
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
